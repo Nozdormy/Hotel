@@ -1,22 +1,24 @@
 package service;
 
-import model.Hotel;
 import model.Room;
+import repository.RoomRepository;
 
 import java.time.LocalDate;
 
 public class BookingService {
 
-    /*
-    Добавить поля в случае необходимости
-     */
+    private final RoomRepository roomRepository;
+
+    public BookingService(RoomRepository roomRepository) {
+        this.roomRepository = roomRepository;
+    }
 
     public boolean isRoomAvailable(Room room, LocalDate checkIn, LocalDate checkOut) {
         // TODO: Реализовать проверку доступности номера
         return false;
     }
 
-    public boolean bookRoom(Hotel hotel, Room room, LocalDate checkIn, LocalDate checkOut) {
+    public boolean bookRoom(Room room, LocalDate checkIn, LocalDate checkOut) {
         // TODO: Реализовать логику бронирования номера
         return false;
     }
