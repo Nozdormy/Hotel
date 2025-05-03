@@ -27,8 +27,6 @@
 
 ### BookingService
 
-- Реализовать хранение броней
-
 - `isRoomAvailable(Room room, LocalDate checkIn, LocalDate checkOut)`  
   Проверить доступность номера. Сейчас заглушка. Реализовать реальную проверку
 
@@ -38,6 +36,12 @@
 
 - `calculatePrice(Room room, LocalDate checkIn, LocalDate checkOut)`  
   Вычислить полную стоимость: цена за ночь * количество ночей
+
+### RoomRepositoryImpl
+
+- Реализовать хранение броней
+
+- Реализовать поиск комнат
 
 
 ## Правила реализации
