@@ -2,12 +2,17 @@ package repository;
 
 import model.Room;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Optional;
 
 public interface RoomRepository {
 
-    Optional<Room> findById(int id);
+    Optional<Room> findById(int roomId);
 
-    List<Room> findAll();
+    Collection<Room> findAll();
+
+    Collection<LocalDate> findDatesByRoomId(int roomId);
+
+    void saveNewReservation(int roomId, Collection<LocalDate> dates);
 }

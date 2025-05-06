@@ -30,7 +30,7 @@
 - `isRoomAvailable(Room room, LocalDate checkIn, LocalDate checkOut)`  
   Проверить доступность номера. Сейчас заглушка. Реализовать реальную проверку
 
-- `bookRoom(Hotel hotel, Room room, Guest guest, LocalDate checkIn, LocalDate checkOut)`  
+- `bookRoom(Room room, Guest guest, LocalDate checkIn, LocalDate checkOut)`  
   Если номер доступен — выполнить бронирование. Вернуть `true` если бронирование
   успешно, иначе `false`.
 
@@ -39,9 +39,15 @@
 
 ### RoomRepositoryImpl
 
-- Реализовать хранение броней
+- реализовать хранение состояния комнат и бронирований
 
-- Реализовать поиск комнат
+- реализовать логику поиска комнаты по идентификатору
+
+- реализовать логику поиска всех комнат
+
+- реализовать логику поиска бронирований по roomId
+
+- реализовать логику создания новых бронирований
 
 
 ## Правила реализации
