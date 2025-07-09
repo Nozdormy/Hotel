@@ -4,6 +4,9 @@ import model.Room;
 import repository.RoomRepository;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class BookingService {
 
@@ -14,17 +17,37 @@ public class BookingService {
     }
 
     public boolean isRoomAvailable(Room room, LocalDate checkIn, LocalDate checkOut) {
-        // TODO: Реализовать проверку доступности номера
-        return false;
+        if (checkIn == null || checkOut == null || checkOut.isBefore(checkIn)) {
+            throw new IllegalArgumentException("Некоретная дата.");
+        }
+
+        List<LocalDate> reservedDates = roomRepository.findDatesByRoomId(room.id());
+
+        List<LocalDate> requestedDates = Stream
+                .iterate(checkIn, date -> date.isBefore(checkOut), date -> date.plusDays(1))
+                .toList();
+
+        boolean hasConflict = requestedDates.stream().anyMatch(reservedDates::contains);
+
+        return !hasConflict;
     }
 
     public boolean bookRoom(Room room, LocalDate checkIn, LocalDate checkOut) {
-        // TODO: Реализовать логику бронирования номера
-        return false;
+        if (!isRoomAvailable(room, checkIn, checkOut)) {
+            return false;
+        }
+
+        List<LocalDate> requestedDates = Stream.
+                iterate(checkIn, date -> date.isBefore(checkOut), date -> date.plusDays(1))
+                .toList();
+        roomRepository.saveNewReservation(room.id(), requestedDates);
+
+        return true;
     }
 
     public double calculatePrice(Room room, LocalDate checkIn, LocalDate checkOut) {
-        // TODO: Реализовать расчет стоимости
-        return 0.0;
+        long nights = ChronoUnit.DAYS.between(checkIn, checkOut);
+
+        return nights * room.pricePerNight();
     }
 }
